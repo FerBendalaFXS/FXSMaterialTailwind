@@ -1,50 +1,30 @@
-# FXStreet Frontend test
+# React + TypeScript + Vite
 
-This manual provides instructions for running and building an application in development and production mode.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Install dependecies
-Before getting started, ensure that all the necessary dependencies are installed by running the following command:
-```bash
-npm install
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
 ```
 
-## Development
-To run the application in development mode, follow these steps:
-1. Start the development server with the following command:
-```bash
-npm start
-```
-
-2. If the browser doesn't open automatically, navigate to http://localhost:3000/ to view the application.
-
-
-## Production
-To run the application in production mode, follow these steps:
-1. Build the production server by running the following command:
-```bash
-npm run build
-```
-
-2. Start the server with the following command:
-```bash
-npm run serve
-```
-
-3. If the browser doesn't open automatically, navigate to http://localhost:8000/ to view the application.
-
-
-## Testing
-To execute the application's tests, use the following commands:
-1. Run all tests with coverage:
-```bash
-npm run test
-```
-
-2. Run a specific test file:
-```bash
-npm run test tests/{folder}/{file}.test.js
-```
-
-## Netlify
-If you want to see the deployed version on Netlify, you can visit the following URL:
-https://64fcc820fa00dc1e57fbbed4--gorgeous-profiterole-75d87f.netlify.app/
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
