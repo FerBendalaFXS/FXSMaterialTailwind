@@ -1,6 +1,8 @@
-import React from 'react'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './app'
+
+import { RouterProvider } from 'react-router-dom'
+import router from './routes'
 
 import './index.scss'
 
@@ -8,9 +10,9 @@ import { ThemeProvider } from '@material-tailwind/react'
 
 const root = document.getElementById('root')!
 ReactDOM.createRoot(root).render(
-    <React.StrictMode>
+    <StrictMode>
         <ThemeProvider>
-            <App />
+            <RouterProvider router={router} />
         </ThemeProvider>
-    </React.StrictMode>
+    </StrictMode>
 )
