@@ -1,0 +1,14 @@
+[
+    {
+        "section": "Editorial",
+        "items": ["Analytics", "Reporting", "Projects"]
+    },
+    {
+        "section": "Business",
+        "items": ["Orders", "Products"]
+    },
+    {
+        "section": "Management",
+        "items": ["Configuration", "Web vitas", "Telegram Campaigns"]
+    }
+]

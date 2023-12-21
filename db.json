@@ -1,0 +1,93 @@
+{
+  "login": [
+    {
+      "username": "cambiado",
+      "password": "cambiado",
+      "id": 2
+    },
+    {
+      "username": "cambiado",
+      "password": "cambiado",
+      "id": 3
+    },
+    {
+      "username": "ferCopy",
+      "password": "12345678",
+      "id": 6
+    },
+    {
+      "username": "ferCopy",
+      "password": "12345678",
+      "id": 7
+    },
+    {
+      "username": "ferCopy",
+      "password": "12345678",
+      "id": 8
+    },
+    {
+      "username": "ferCopy",
+      "password": "12345678",
+      "id": 9
+    }
+  ],
+  "messageLists": [
+    {
+      "id": "1",
+      "listName": "crypto-j4t-yearly",
+      "visualizationCode": "default",
+      "messageInterval": 3,
+      "channel": "email",
+      "messages": [
+        {
+          "title": "Crypto Update 1",
+          "url": "https://example.com/crypto-update-1",
+          "cta": {
+            "text": "Learn More",
+            "url": "https://example.com/learn-more-1"
+          }
+        },
+        {
+          "title": "Important Announcement",
+          "url": "https://example.com/announcement",
+          "cta": null
+        },
+        {
+          "title": "Crypto Update 2",
+          "url": "https://example.com/crypto-update-2",
+          "cta": {
+            "text": "Explore",
+            "url": "https://example.com/explore"
+          }
+        }
+      ],
+      "isActive": true
+    },
+    {
+      "id": "2",
+      "listName": "finance-h7s-monthly",
+      "visualizationCode": "dark-theme",
+      "messageInterval": 5,
+      "channel": "sms",
+      "messages": [
+        {
+          "title": "Monthly Financial Report",
+          "url": "https://example.com/financial-report",
+          "cta": {
+            "text": "Download PDF",
+            "url": "https://example.com/download-pdf"
+          }
+        },
+        {
+          "title": "Investment Tips",
+          "url": "https://example.com/investment-tips",
+          "cta": {
+            "text": "Read Now",
+            "url": "https://example.com/read-now"
+          }
+        }
+      ],
+      "isActive": false
+    }
+  ]
+}

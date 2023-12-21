@@ -6,7 +6,7 @@ import fxsLogo from '/images/logo-fxstreet.svg'
 const Header = () => {
     const title = 'Log out'
     return (
-        <header className='sticky top-0 z-10'>
+        <header className='sticky top-0 z-10 col-span-12'>
             <Navbar className='max-w-full h-[4rem] rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-blue-gray-900 bg-opacity-100 border-none'>
                 <div className='flex items-center justify-between'>
                     <Link to='/'>
