@@ -16,8 +16,6 @@ const AuthProvider: FC<AuthProviderProps> = ({ children, newToken }) => {
 
     useEffect(() => {
         if (newToken && token !== newToken) {
-            console.log('hello')
-
             setToken(newToken)
             setUser(decodeJWT(newToken))
         }

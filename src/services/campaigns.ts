@@ -1,10 +1,17 @@
-const baseUrl = 'http://localhost:3000/login'
+const baseUrl = 'http://localhost:3000/messageLists'
 
 const getAll = async () => {
     const request = fetch(baseUrl)
     const response = await request
     const data = await response.json()
-    console.log(data)
+
+    return data
+}
+
+const get = async (id: number) => {
+    const request = fetch(`${baseUrl}/${id}`)
+    const response = await request
+    const data = await response.json()
 
     return data
 }
@@ -44,4 +51,4 @@ const remove = async (id: number) => {
     return data
 }
 
-export { getAll, create, update, remove }
+export { getAll, get, create, update, remove }

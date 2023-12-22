@@ -1,161 +1,110 @@
 import { useEffect, useState } from 'react'
 import { create, getAll, remove, update } from '../../services/campaigns'
 
-import { Button, ButtonGroup, Card, IconButton, Typography } from '@material-tailwind/react'
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
+import {
+    Button,
+    ButtonGroup,
+    Chip,
+    IconButton,
+    Tooltip,
+    Typography,
+} from '@material-tailwind/react'
+import Table from '../../components/table'
+import { DocumentDuplicateIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
 
 const TelegramCampaigns = () => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        getAllUsers()
+        getCampaigns()
     }, [])
 
-    const getAllUsers = async () => {
+    const getCampaigns = async () => {
         const newData = await getAll()
         setData(newData)
     }
 
-    const handleCreateUser = async () => {
-        setLoading(true)
-        const newObject = {
-            username: 'ferCopy',
-            password: '12345678',
-        }
+    const handleDuplicateCampaign = async (object: object) => {
+        const { ...newCampaign } = object
+        const id = data.length + 1
+        const newData = { ...newCampaign, id }
 
-        await create(newObject)
-        getAllUsers()
+        setData([...data, newData])
+
+        delete object.id
+        await create(object)
     }
 
-    const handleUpdateUser = async (object: object, id: number) => {
-        await update(object, id)
-        getAllUsers()
+    const handleUpdateCampaign = async () => {
+        console.log('update')
     }
 
     const handleDeleteUser = async (id: number) => {
+        const updatedData = data.filter(campaign => campaign.id !== id)
+        setData(updatedData)
         await remove(id)
-        getAllUsers()
     }
 
     return (
         <>
             <Typography
                 placeholder='Telegram Campaigns'
-                variant='h2'>
+                variant='h2'
+                className='mb-8'>
                 Telegram Campaigns
             </Typography>
 
-            <Button
-                className='rounded-full'
-                loading={loading}
-                placeholder='Create user'
-                onClick={handleCreateUser}>
-                Create user
-            </Button>
+            <Table header={['Name', 'Messages', 'Channel', 'Finish date', 'Start date', '']}>
+                {data.map(({ listName, messages, channel, id }, index) => {
+                    const isLast = index === data.length - 1
+                    const classes = isLast ? 'p-4' : 'p-4 border-b border-blue-gray-50'
 
-            <Card
-                placeholder='Table'
-                className='w-full'>
-                <table className='w-full min-w-max table-auto text-left'>
-                    <thead>
-                        <tr>
-                            <td className='border-b border-blue-gray-100 p-4'>
-                                <Typography
-                                    placeholder='id'
-                                    variant='small'
-                                    color='blue-gray'
-                                    className='font-bold leading-none opacity-70'>
-                                    id
-                                </Typography>
+                    return (
+                        <tr key={index}>
+                            <td className={classes}>{listName}</td>
+                            <td className={classes}>{messages.length}</td>
+                            <td className={classes}>
+                                <Chip
+                                    variant='ghost'
+                                    color='green'
+                                    size='lg'
+                                    value={channel}
+                                    className='w-fit'
+                                />
                             </td>
-                            <td className='border-b border-blue-gray-100 p-4'>
-                                <Typography
-                                    placeholder='Username'
-                                    variant='small'
-                                    color='blue-gray'
-                                    className='font-bold leading-none opacity-70'>
-                                    username
-                                </Typography>
-                            </td>
-                            <td className='border-b border-blue-gray-100 p-4'>
-                                <Typography
-                                    placeholder='Password'
-                                    variant='small'
-                                    color='blue-gray'
-                                    className='font-bold leading-none opacity-70'>
-                                    password
-                                </Typography>
+                            <td className={classes}>{new Date().toDateString()}</td>
+                            <td className={classes}>{new Date().toDateString()}</td>
+                            <td className={classes}>
+                                <Tooltip content='Dubplicate'>
+                                    <IconButton
+                                        placeholder='Duplicate Campaign'
+                                        variant='text'
+                                        onClick={() => handleDuplicateCampaign(data[id - 1])}>
+                                        <DocumentDuplicateIcon className='h-4 w-4' />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip content='Edit'>
+                                    <IconButton
+                                        placeholder='Edit Campaign'
+                                        variant='text'
+                                        onClick={() => handleUpdateCampaign()}>
+                                        <PencilIcon className='h-4 w-4' />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip content='Remove'>
+                                    <IconButton
+                                        placeholder='Remove Campaign'
+                                        variant='text'
+                                        onClick={() => handleDeleteUser(id)}>
+                                        <TrashIcon className='h-4 w-4' />
+                                    </IconButton>
+                                </Tooltip>
                             </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {data.map(({ username, password, id }, index) => {
-                            const isLast = index === data.length - 1
-                            const classes = isLast ? 'p-4' : 'p-4 border-b border-blue-gray-50'
-
-                            return (
-                                <tr key={id}>
-                                    <td className={classes}>
-                                        <Typography
-                                            placeholder='id'
-                                            variant='small'
-                                            color='blue-gray'
-                                            className='font-normal'>
-                                            {id}
-                                        </Typography>
-                                    </td>
-                                    <td className={classes}>
-                                        <Typography
-                                            placeholder='Username'
-                                            variant='small'
-                                            color='blue-gray'
-                                            className='font-normal'>
-                                            {username}
-                                        </Typography>
-                                    </td>
-                                    <td className={classes}>
-                                        <Typography
-                                            placeholder='Password'
-                                            variant='small'
-                                            color='blue-gray'
-                                            className='font-normal'>
-                                            {password}
-                                        </Typography>
-                                    </td>
-                                    <td className={classes}>
-                                        <ButtonGroup
-                                            placeholder='Button group'
-                                            className='gap-2'>
-                                            <IconButton
-                                                className='rounded-full'
-                                                placeholder='Update user'
-                                                onClick={() =>
-                                                    handleUpdateUser(
-                                                        {
-                                                            username: 'cambiado',
-                                                            password: 'cambiado',
-                                                            id,
-                                                        },
-                                                        id
-                                                    )
-                                                }>
-                                                <PencilIcon className='h-4 w-4' />
-                                            </IconButton>
-                                            <IconButton
-                                                className='rounded-full'
-                                                placeholder='Update user'
-                                                onClick={() => handleDeleteUser(id)}>
-                                                <TrashIcon className='h-4 w-4' />
-                                            </IconButton>
-                                        </ButtonGroup>
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            </Card>
+                    )
+                })}
+            </Table>
         </>
     )
 }

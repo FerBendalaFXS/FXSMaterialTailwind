@@ -12,10 +12,12 @@ const Root = () => {
     }
 
     return (
-        <section className='flex flex-col'>
+        <section className='flex flex-col h-[100vh]'>
             <Header />
-            <main className='flex h-[calc(100vh-4rem)] bg-blue-gray-50'>
-                <Aside />
+            <main className='flex h-full bg-blue-gray-50'>
+                <aside className='hidden lg:block h-full'>
+                    <Aside />
+                </aside>
                 <section className='p-5 h-full w-full overflow-y-auto'>
                     <Outlet />
                 </section>

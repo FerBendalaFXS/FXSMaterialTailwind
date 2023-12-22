@@ -11,18 +11,12 @@ import {
     AccordionHeader,
     AccordionBody,
 } from '@material-tailwind/react'
-import {
-    ShoppingBagIcon,
-    DocumentTextIcon,
-    ChevronRightIcon,
-    ChevronDownIcon,
-} from '@heroicons/react/24/outline'
+import { ShoppingBagIcon, DocumentTextIcon } from '@heroicons/react/24/solid'
+import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 
 import data from './content.json'
 
 const Aside = () => {
-    console.log(data)
-
     const [open, setOpen] = useState(0)
 
     const handleOpen = (value: number) => {
@@ -32,7 +26,7 @@ const Aside = () => {
     return (
         <Card
             placeholder='Aside menu'
-            className='w-64 min-w-[260px] p-2 shadow-xl shadow-blue-gray-900/5 rounded-none overflow-auto'>
+            className='h-full w-full lg:w-64 min-w-[260px] p-2 shadow-xl shadow-blue-gray-900/5 rounded-none overflow-auto'>
             <List
                 placeholder='Menu'
                 className='min-w-0'>
